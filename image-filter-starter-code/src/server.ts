@@ -31,9 +31,7 @@ import timeout from 'connect-timeout';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  /**************************************************************************** */
-
-  app.get("/filteredimage/", async (req: Request, res: Response) => {
+  app.get("/filteredimage/", async (req, res) => {
     let{image_url} = req.query;
     if (!image_url)  {
       return res.status(400).send(`image url is required`);
@@ -42,14 +40,13 @@ import timeout from 'connect-timeout';
     try {
       await res.status(200).sendFile(filteredpath, {}, (err) => {
         if(err) {
-          return res.status(422).send("unable to process the image.");
+          res.status(422).send("unable to process the image.");
         }
         deleteLocalFiles([filteredpath]);
       });
     } catch (e) {
       return res.status(422).send("unable to process the image.");
     }
-
   });
 
   //! END @TODO1
