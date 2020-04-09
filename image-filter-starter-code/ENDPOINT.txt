@@ -1,0 +1,2 @@
+EB url:
+http://image-filter-dev2.us-west-1.elasticbeanstalk.com/
